@@ -10,35 +10,35 @@ import { Projects } from "./Projects";
 import { Contact } from "./Contact";
 
 export const Wrapper = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
-  useGSAP(() => {
-    if (containerRef.current && targetRef.current) {
-      const amountToScroll = targetRef.current.offsetWidth - window.innerWidth;
+	const containerRef = useRef<HTMLDivElement>(null);
+	const targetRef = useRef<HTMLDivElement>(null);
+	useGSAP(() => {
+		if (containerRef.current && targetRef.current) {
+			const amountToScroll = targetRef.current.offsetWidth - window.innerWidth;
 
-      gsap.to(targetRef.current, {
-        x: -amountToScroll,
-        duration: 2,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          pin: containerRef.current,
-          start: "left top",
-          end: "+=" + amountToScroll,
-          scrub: 1,
-          markers: true,
-        },
-      });
-    }
-  }, {});
-  return (
-    <div ref={containerRef} className="flex flex-nowrap h-[100vh] w-full">
-      <div className="flex " ref={targetRef}>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </div>
-    </div>
-  );
+			gsap.to(targetRef.current, {
+				x: -amountToScroll,
+				duration: 2,
+				scrollTrigger: {
+					trigger: containerRef.current,
+					pin: containerRef.current,
+					start: "left top",
+					end: "+=" + amountToScroll,
+					scrub: 1,
+					markers: true,
+				},
+			});
+		}
+	}, {});
+	return (
+		<div ref={containerRef} className="flex flex-nowrap h-[100vh] w-full">
+			<div className="flex gap-0 m-0" ref={targetRef}>
+				<Hero />
+				<About />
+				<Skills />
+				<Projects />
+				<Contact />
+			</div>
+		</div>
+	);
 };

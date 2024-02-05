@@ -5,3 +5,12 @@
 .wrapper {
   overflow-x: overlay;
 }
+
+@font-face {
+  font-family: "dharma";
+  src: url(DharmaGothicC-Heavy.ttf);
+}
+
+h1 {
+  font-family: "dharma";
+}
