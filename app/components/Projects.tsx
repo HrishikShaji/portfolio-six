@@ -1,3 +1,3 @@
 export const Projects = () => {
-	return <div className="h-full w-screen bg-orange-500"></div>;
+  return <div className="h-full w-[100vw] bg-gray-500 panel"></div>;
 };

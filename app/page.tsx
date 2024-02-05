@@ -4,13 +4,20 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { Wrapper } from "./components/Wrapper";
+import { useEffect, useState } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Home() {
-	return (
-		<main className="">
-			<Wrapper />
-		</main>
-	);
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+  return (
+    <main className="">
+      <Wrapper />
+    </main>
+  );
 }

@@ -1,3 +1,3 @@
 export const Hero = () => {
-	return <div className="h-full w-screen bg-blue-500"></div>;
+  return <div className="h-full w-[100vw] bg-gray-500 panel"></div>;
 };

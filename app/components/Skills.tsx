@@ -1,3 +1,3 @@
 export const Skills = () => {
-	return <div className="h-full w-screen bg-green-500"></div>;
+  return <div className="h-full w-[100vw] bg-gray-500 panel"></div>;
 };
