@@ -71,9 +71,10 @@ export const Wrapper = () => {
 							fill: "blue",
 							scrollTrigger: {
 								containerAnimation: animation,
-								trigger: path,
-								start: "left 25%",
-								end: "left 5%",
+								trigger: city,
+
+								start: "left 90%",
+								end: "left 10%",
 								scrub: 1,
 								markers: true,
 							},
@@ -98,8 +99,16 @@ export const Wrapper = () => {
 			<div className="flex relative gap-0 m-0 " ref={targetRef}>
 				<div
 					ref={heroRef}
-					className="absolute z-20 flex bottom-0 left-0 w-[100vw] h-[600px]"
+					className="absolute z-20 flex bottom-0 left-0 w-full h-[600px]"
 				>
+					<SampleCity />
+					<SampleCity />
+					<SampleCity />
+					<SampleCity />
+					<SampleCity />
+					<SampleCity />
+					<SampleCity />
+					<SampleCity />
 					<SampleCity />
 					<SampleCity />
 				</div>
