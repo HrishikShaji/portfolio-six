@@ -7,7 +7,9 @@ export const About = () => {
 			<p className="text-2xl">{data.about.description}</p>
 			<div className="h-[140vh] absolute w-[120px] bg-orange-500 rotate-[30deg] -top-40 right-[100px] mix-blend-difference"></div>
 			<div className="h-[140vh] absolute w-[120px] bg-orange-500 rotate-[30deg] -top-40 right-[300px] mix-blend-difference"></div>
+
 			<div className="h-[140vh] absolute w-[120px] bg-orange-500 rotate-[30deg] -top-40 right-[500px] mix-blend-difference"></div>
+			<div className="absolute w-full h-full z-20 flex bottom-0 left-0"></div>
 		</div>
 	);
 };

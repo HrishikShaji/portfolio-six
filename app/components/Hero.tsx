@@ -1,7 +1,7 @@
 "use client";
 
-import { Ref, useEffect, useState } from "react";
-import { SampleCity } from "./SampleCity";
+import { Ref, forwardRef, useEffect, useState } from "react";
+import SampleCity from "./SampleCity";
 
 export const Hero = () => {
 	return (

@@ -2,11 +2,14 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Ref, useEffect, useRef, useState } from "react";
+import { LegacyRef, Ref, forwardRef, useEffect, useRef, useState } from "react";
 
-export const SampleCity = () => {
+interface SampleCityProps { }
+
+const SampleCity = forwardRef<SVGSVGElement, SampleCityProps>(({ }, ref) => {
 	return (
 		<svg
+			ref={ref}
 			className="sample-city"
 			viewBox="0 0 3075 1546"
 			fill="none"
@@ -103,4 +106,8 @@ export const SampleCity = () => {
 			/>
 		</svg>
 	);
-};
+});
+
+SampleCity.displayName = "SampleCity";
+
+export default SampleCity;

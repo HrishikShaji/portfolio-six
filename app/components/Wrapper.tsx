@@ -2,7 +2,14 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import {
+	LegacyRef,
+	ReactNode,
+	RefObject,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import { Hero } from "./Hero";
 import { About } from "./About";
 import { Skills } from "./Skills";
@@ -10,25 +17,32 @@ import { Projects } from "./Projects";
 import { Contact } from "./Contact";
 import { Sun } from "./Sun";
 import { userAgentFromString } from "next/server";
-import { SampleCity } from "./SampleCity";
+import SampleCity from "./SampleCity";
 
 export const Wrapper = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const targetRef = useRef<HTMLDivElement>(null);
 	const sunRef = useRef<HTMLDivElement>(null);
+	const oneRef = useRef<SVGSVGElement>(null);
+	const twoRef = useRef<SVGSVGElement>(null);
+	const threeRef = useRef<SVGSVGElement>(null);
+	const fourRef = useRef<SVGSVGElement>(null);
+	const fiveRef = useRef<SVGSVGElement>(null);
+	const sixRef = useRef<SVGSVGElement>(null);
+	const sevenRef = useRef<SVGSVGElement>(null);
+	const nineRef = useRef<SVGSVGElement>(null);
+	const eightRef = useRef<SVGSVGElement>(null);
+	const tenRef = useRef<SVGSVGElement>(null);
 
 	const heroRef = useRef<HTMLDivElement>(null);
+	const cityRefs = useRef<HTMLDivElement[]>([]);
+	cityRefs.current = [];
 
 	useGSAP(
 		() => {
 			const pathOne = document.getElementById("path-one");
-			if (
-				heroRef.current &&
-				containerRef.current &&
-				targetRef.current &&
-				sunRef.current
-			) {
-				console.log(pathOne);
+			if (containerRef.current && targetRef.current && sunRef.current) {
+				console.log(cityRefs.current);
 				const amountToScroll =
 					targetRef.current.offsetWidth - window.innerWidth;
 
@@ -40,7 +54,7 @@ export const Wrapper = () => {
 						pin: containerRef.current,
 						start: "left top",
 						end: "+=" + amountToScroll,
-						scrub: 1,
+						scrub: true,
 					},
 				});
 
@@ -49,68 +63,89 @@ export const Wrapper = () => {
 						trigger: sunRef.current,
 						start: "left top",
 						end: "+=" + amountToScroll,
-						scrub: 1,
+						scrub: true,
 					},
 				});
 
 				tl.to(sunRef.current, {
 					motionPath: {
 						path: [
-							{ x: window.innerWidth / 2, y: -100 },
+							{ x: window.innerWidth / 2, y: -150 },
 							{ x: window.innerWidth, y: 0 },
 						],
 					},
 				});
 				const cities = document.getElementsByClassName("sample-city");
 
-				Array.from(cities).forEach((city) => {
-					const paths = Array.from(city.getElementsByClassName("city-one"));
+				const cityAnimation = (ref: SVGSVGElement) => {
+					const paths = Array.from(ref.getElementsByClassName("city-one"));
 
 					paths.forEach((path) => {
 						gsap.to(path, {
 							fill: "blue",
 							scrollTrigger: {
 								containerAnimation: animation,
-								trigger: city,
-
-								start: "left 90%",
-								end: "left 10%",
-								scrub: 1,
+								trigger: ref,
+								start: "left 50%",
+								end: "left 30%",
+								scrub: true,
 								markers: true,
 							},
 						});
 					});
-				});
+				};
+
+				if (
+					oneRef.current &&
+					twoRef.current &&
+					threeRef.current &&
+					fourRef.current &&
+					fiveRef.current &&
+					sixRef.current &&
+					sevenRef.current &&
+					eightRef.current &&
+					nineRef.current &&
+					tenRef.current
+				) {
+					cityAnimation(oneRef.current);
+					cityAnimation(twoRef.current);
+					cityAnimation(threeRef.current);
+					cityAnimation(fourRef.current);
+					cityAnimation(fiveRef.current);
+					cityAnimation(sixRef.current);
+					cityAnimation(sevenRef.current);
+					cityAnimation(eightRef.current);
+					cityAnimation(nineRef.current);
+					cityAnimation(tenRef.current);
+				}
 			}
 		},
-		{ scope: heroRef },
+		{ scope: containerRef },
 	);
 
 	return (
 		<div
 			ref={containerRef}
-			className="flex relative flex-nowrap h-[100vh] w-full"
+			className="flex relative
+			flex-nowrap h-[100vh] w-full"
 		>
 			<div
 				ref={sunRef}
-				className="w-40 fixed h-40 -translate-x-[50%] rounded-full bg-black top-40 left-0 z-20"
+				className="w-20 fixed h-20 -translate-x-[50%] rounded-full bg-orange-500 top-40 left-0 mix-blend-difference z-20"
 			></div>
 
 			<div className="flex relative gap-0 m-0 " ref={targetRef}>
-				<div
-					ref={heroRef}
-					className="absolute z-20 flex bottom-0 left-0 w-full h-[600px]"
-				>
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
-					<SampleCity />
+				<div className="absolute flex z-20 top-40 left-0 w-[500vw] h-[600px]">
+					<SampleCity ref={oneRef} />
+					<SampleCity ref={twoRef} />
+					<SampleCity ref={threeRef} />
+					<SampleCity ref={fourRef} />
+					<SampleCity ref={fiveRef} />
+					<SampleCity ref={sixRef} />
+					<SampleCity ref={sevenRef} />
+					<SampleCity ref={eightRef} />
+					<SampleCity ref={nineRef} />
+					<SampleCity ref={tenRef} />
 				</div>
 				<Hero />
 				<About />
