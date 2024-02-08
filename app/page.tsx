@@ -7,6 +7,7 @@ import { Wrapper } from "./components/Wrapper";
 import { useEffect, useState } from "react";
 import { Sun } from "./components/Sun";
 import MotionPathPlugin from "gsap/dist/MotionPathPlugin";
+import { ScrollContextProvider } from "./components/ScrollContext";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, MotionPathPlugin);
 
@@ -19,7 +20,9 @@ export default function Home() {
 	if (!isMounted) return null;
 	return (
 		<main className="">
-			<Wrapper />
+			<ScrollContextProvider>
+				<Wrapper />
+			</ScrollContextProvider>
 		</main>
 	);
 }
