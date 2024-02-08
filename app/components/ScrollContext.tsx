@@ -3,83 +3,83 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {
-  createContext,
-  useContext,
-  useRef,
-  PropsWithChildren,
-  useEffect,
+	createContext,
+	useContext,
+	useRef,
+	PropsWithChildren,
+	useEffect,
 } from "react";
 
 interface Refs {
-  containerRef: React.MutableRefObject<HTMLDivElement | null>;
-  targetRef: React.MutableRefObject<HTMLDivElement | null>;
-  sunRef: React.MutableRefObject<HTMLDivElement | null>;
-  cityContainer: React.MutableRefObject<HTMLDivElement | null>;
-  scrollTween: React.MutableRefObject<gsap.core.Animation | undefined>;
+	containerRef: React.MutableRefObject<HTMLDivElement | null>;
+	targetRef: React.MutableRefObject<HTMLDivElement | null>;
+	sunRef: React.MutableRefObject<HTMLDivElement | null>;
+	cityContainer: React.MutableRefObject<HTMLDivElement | null>;
+	scrollTween: React.MutableRefObject<gsap.core.Animation | undefined>;
 }
 
 export const ScrollContext = createContext<Refs | null>(null);
 
 export const ScrollContextProvider: React.FC<PropsWithChildren<{}>> = ({
-  children,
+	children,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
-  const sunRef = useRef<HTMLDivElement>(null);
-  const cityContainer = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const targetRef = useRef<HTMLDivElement>(null);
+	const sunRef = useRef<HTMLDivElement>(null);
+	const cityContainer = useRef<HTMLDivElement>(null);
 
-  const scrollTween = useRef<gsap.core.Animation | undefined>();
+	const scrollTween = useRef<gsap.core.Animation | undefined>();
 
-  useGSAP(
-    () => {
-      if (containerRef.current && targetRef.current && sunRef.current) {
-        const amountToScroll =
-          targetRef.current.offsetWidth - window.innerWidth;
+	useGSAP(
+		() => {
+			if (containerRef.current && targetRef.current && sunRef.current) {
+				const amountToScroll =
+					targetRef.current.offsetWidth - window.innerWidth;
 
-        scrollTween.current = gsap.to(targetRef.current, {
-          x: -amountToScroll,
-          duration: 2,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            pin: containerRef.current,
-            start: "left top",
-            end: `+=${amountToScroll}`,
-            scrub: 1,
-          },
-        });
+				scrollTween.current = gsap.to(targetRef.current, {
+					x: -amountToScroll,
+					duration: 2,
+					ease: "none",
+					scrollTrigger: {
+						trigger: containerRef.current,
+						pin: containerRef.current,
+						start: "left top",
+						end: `+=${amountToScroll}`,
+						scrub: 1,
+					},
+				});
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sunRef.current,
-            start: "left top",
-            end: `+=${amountToScroll}`,
-            scrub: 1,
-          },
-        });
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: sunRef.current,
+						start: "left top",
+						end: `+=${amountToScroll}`,
+						scrub: 1,
+					},
+				});
 
-        tl.to(sunRef.current, {
-          motionPath: {
-            path: [
-              { x: window.innerWidth / 2, y: -150 },
-              { x: window.innerWidth, y: 0 },
-            ],
-          },
-        });
-      }
-    },
-    { dependencies: [scrollTween.current] },
-  );
+				tl.to(sunRef.current, {
+					motionPath: {
+						path: [
+							{ x: window.innerWidth / 2, y: -150 },
+							{ x: window.innerWidth, y: 0 },
+						],
+					},
+				});
+			}
+		},
+		{ dependencies: [scrollTween.current] },
+	);
 
-  const refs = {
-    containerRef,
-    targetRef,
-    sunRef,
-    cityContainer,
-    scrollTween,
-  };
+	const refs = {
+		containerRef,
+		targetRef,
+		sunRef,
+		cityContainer,
+		scrollTween,
+	};
 
-  return (
-    <ScrollContext.Provider value={refs}>{children}</ScrollContext.Provider>
-  );
+	return (
+		<ScrollContext.Provider value={refs}>{children}</ScrollContext.Provider>
+	);
 };
