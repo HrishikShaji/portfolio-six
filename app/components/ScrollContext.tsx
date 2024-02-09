@@ -32,7 +32,7 @@ export const ScrollContextProvider: React.FC<PropsWithChildren<{}>> = ({
 
 	useGSAP(
 		() => {
-			if (containerRef.current && targetRef.current && sunRef.current) {
+			if (containerRef.current && targetRef.current) {
 				const amountToScroll =
 					targetRef.current.offsetWidth - window.innerWidth;
 
@@ -49,23 +49,28 @@ export const ScrollContextProvider: React.FC<PropsWithChildren<{}>> = ({
 					},
 				});
 
-				const tl = gsap.timeline({
-					scrollTrigger: {
-						trigger: sunRef.current,
-						start: "left top",
-						end: `+=${amountToScroll}`,
-						scrub: 1,
-					},
-				});
-
-				tl.to(sunRef.current, {
-					motionPath: {
-						path: [
-							{ x: window.innerWidth / 2, y: -150 },
-							{ x: window.innerWidth, y: 0 },
-						],
-					},
-				});
+				{
+					/*  
+											  
+															  const tl = gsap.timeline({
+																  scrollTrigger: {
+																	  trigger: sunRef.current,
+																	  start: "left top",
+																	  end: `+=${amountToScroll}`,
+																	  scrub: 1,
+																  },
+															  });
+											  
+															  tl.to(sunRef.current, {
+																  motionPath: {
+																	  path: [
+																		  { x: window.innerWidth / 2, y: -150 },
+																		  { x: window.innerWidth, y: 0 },
+																	  ],
+																  },
+															  });
+											  */
+				}
 			}
 		},
 		{ dependencies: [scrollTween.current] },

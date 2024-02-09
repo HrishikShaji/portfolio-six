@@ -3,6 +3,7 @@ import { data } from "../lib/data";
 import SampleCityTwo from "./SampleCityTwo";
 import { ScrollContext } from "./ScrollContext";
 import gsap from "gsap";
+import Outer from "./Outer";
 
 export const Skills = () => {
 	const refOne = useRef<SVGSVGElement>(null);
@@ -47,18 +48,18 @@ export const Skills = () => {
 	return (
 		<div
 			ref={mainRef}
-			className="relative h-full w-[100vw] bg-orange-500 flex flex-col gap-10 panel p-10"
+			className="relative h-full w-[100vw] flex flex-col gap-5 panel p-5"
 		>
 			<h1 className="text-9xl">MY SKILLS</h1>
-			<div className="w-full grid grid-cols-4 gap-4">
+			<div className="w-full grid grid-cols-8 gap-4">
 				{data.skills.data.map((item, i) => (
 					<div key={i}>
-						<h1 className="text-6xl">{item}</h1>
+						<h1 className="text-5xl">{item}</h1>
 					</div>
 				))}
 			</div>
 			<div className="absolute w-[100vw] z-20 flex bottom-0 left-0">
-				<SampleCityTwo ref={refOne} />
+				<Outer ref={refOne} />
 			</div>
 		</div>
 	);

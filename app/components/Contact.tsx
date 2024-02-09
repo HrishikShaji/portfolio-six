@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import SampleCityTwo from "./SampleCityTwo";
 import { ScrollContext } from "./ScrollContext";
 import gsap from "gsap";
+import Outer from "./Outer";
 
 export const Contact = () => {
 	const refOne = useRef<SVGSVGElement>(null);
@@ -45,7 +46,7 @@ export const Contact = () => {
 	return (
 		<div
 			ref={mainRef}
-			className="h-full relative p-10 flex flex-col gap-10 bg-orange-500 w-[100vw] panel"
+			className="h-full relative p-10 flex flex-col gap-10  w-[100vw] panel"
 		>
 			<h1 className="text-9xl">CONTACT ME</h1>
 			<form className="w-full flex flex-col gap-4 items-start">
@@ -67,7 +68,7 @@ export const Contact = () => {
 				</button>
 			</form>
 			<div className="absolute w-[100vw]  z-20 flex bottom-0 left-0">
-				<SampleCityTwo ref={refOne} />
+				<Outer ref={refOne} />
 			</div>
 		</div>
 	);

@@ -3,6 +3,7 @@ import { data } from "../lib/data";
 import SampleCityTwo from "./SampleCityTwo";
 import { ScrollContext } from "./ScrollContext";
 import gsap from "gsap";
+import Outer from "./Outer";
 
 export const Projects = () => {
 	const refOne = useRef<SVGSVGElement>(null);
@@ -47,7 +48,7 @@ export const Projects = () => {
 	return (
 		<div
 			ref={mainRef}
-			className="h-full relative w-[100vw] bg-orange-500  flex flex-col gap-10 p-10 panel"
+			className="h-full relative w-[100vw]   flex flex-col gap-10 p-10 panel"
 		>
 			<h1 className="text-9xl">MY PROJECTS</h1>
 			<div className="flex gap-4 w-full">
@@ -68,7 +69,7 @@ export const Projects = () => {
 				</div>
 			</div>
 			<div className="absolute w-[100vw]  z-20 flex bottom-0 left-0">
-				<SampleCityTwo ref={refOne} />
+				<Outer ref={refOne} />
 			</div>
 		</div>
 	);
