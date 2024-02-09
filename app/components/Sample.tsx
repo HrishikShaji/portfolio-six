@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { data } from "../lib/data";
 import SampleCityTwo from "./SampleCityTwo";
 import { ScrollContext } from "./ScrollContext";
@@ -7,7 +7,7 @@ import Outer from "./Outer";
 import { CloudOne } from "./CloudOne";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
-export const Skills = () => {
+export const Sample = () => {
   const refOne = useRef<SVGSVGElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
   const refs = useContext(ScrollContext);
@@ -63,71 +63,75 @@ export const Skills = () => {
   }, [refs]);
 
   const coordinates = [
-    {
-      left: "0px",
-      top: "0px",
-    },
-    {
-      left: "300px",
-      top: "0px",
-    },
-    {
-      left: "200px",
-      top: "300px",
-    },
-    {
-      left: "900px",
-      top: "50px",
-    },
-    {
-      left: "1200px",
-      top: "200px",
-    },
-    {
-      left: "1500px",
-      top: "100px",
-    },
-    {
-      left: "1800px",
-      top: "400px",
-    },
-    {
-      left: "2100px",
-      top: "800px",
-    },
-    {
-      left: "2400px",
-      top: "100px",
-    },
-    {
-      left: "2700px",
-      top: "100px",
-    },
-    {
-      left: "2300px",
-      top: "500px",
-    },
-    {
-      left: "2500px",
-      top: "300px",
-    },
-    {
-      left: "100px",
-      top: "100px",
-    },
-    {
-      left: "100px",
-      top: "100px",
-    },
-    {
-      left: "100px",
-      top: "100px",
-    },
-    {
-      left: "100px",
-      top: "100px",
-    },
+    { top: "0px", left: "0px" },
+    { top: "0px", left: "360px" },
+    { top: "0px", left: "720px" },
+    { top: "0px", left: "1080px" },
+    { top: "0px", left: "1440px" },
+    { top: "0px", left: "1800px" },
+    { top: "0px", left: "2160px" },
+    { top: "0px", left: "2520px" },
+    { top: "100px", left: "180px" },
+    { top: "100px", left: "540px" },
+    { top: "100px", left: "900px" },
+    { top: "100px", left: "1260px" },
+    { top: "100px", left: "1620px" },
+    { top: "100px", left: "1980px" },
+    { top: "100px", left: "2340px" },
+    { top: "100px", left: "2700px" },
   ];
+
+  const [arr, setArr] = useState<Record<string, any>[]>([]);
+
+  useEffect(() => {
+    const arr = math();
+    setArr(arr);
+  }, []);
+  const math = () => {
+    const first = [
+      "10px",
+      "-10px",
+      "40px",
+      "50px",
+      "-30px",
+      "0px",
+      "-40px",
+      "20px",
+    ];
+    const second = [
+      "210px",
+      "-70px",
+      "240px",
+      "250px",
+      "60px",
+      "200px",
+      "50px",
+      "220px",
+    ];
+    const arr1 = [];
+    const arr2 = [];
+    for (let i = 0; i < 8; i++) {
+      const obj = {
+        top: first[i],
+        left: `${i * 360}px`,
+      };
+      arr1.push(obj);
+    }
+    for (let i = 0; i < 8; i++) {
+      if (i === 0) {
+        arr2.push({ top: "100px", left: "180px" });
+      } else {
+        const obj = {
+          top: second[i],
+          left: `${i * 360 + 180}px`,
+        };
+        arr2.push(obj);
+      }
+    }
+    return arr1.concat(arr2);
+  };
+
+  console.log(math());
 
   return (
     <div
@@ -142,7 +146,7 @@ export const Skills = () => {
           <div
             key={i}
             className="  absolute z-40"
-            style={{ left: coordinates[i].left, top: coordinates[i].top }}
+            style={{ left: arr[i]?.left, top: arr[i]?.top }}
           >
             <div
               className="relative flex justify-center
@@ -158,12 +162,6 @@ export const Skills = () => {
             </div>
           </div>
         ))}
-      </div>
-      <div className="absolute w-[100vw] z-20 flex bottom-0 left-0">
-        <Outer ref={refOne} />
-      </div>
-      <div className="absolute w-[100vw] z-20 flex bottom-0 right-0">
-        <Outer ref={refOne} />
       </div>
     </div>
   );
